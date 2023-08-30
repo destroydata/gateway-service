@@ -1,0 +1,56 @@
+
+jwt:
+  secret: fewbiuebeot5324980hbhgsd0uub9gpkklnqbp4214989oub926t32be0gbdsn
+
+server:
+  port: 8000
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - name: "CustomGlobalFilter"
+          args:
+            logging: "true"
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+      routes:
+        - id: auth-service
+          uri: "http://localhost:9000"
+          predicates:
+            - Path=/api/v1/auth/**
+        - id: ceo-service
+          uri: "http://localhost:9001"
+          predicates:
+            - Path=/api/v1/owner/**
+        - id: store-service
+          uri: "http://localhost:9003"
+          predicates:
+            - Path=/api/v1/store/**
+        - id: menu-service
+          uri: "http://localhost:9002"
+          predicates:
+            - Path=/api/v1/menu/**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
