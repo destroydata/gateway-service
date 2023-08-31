@@ -9,7 +9,6 @@ import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
-import java.util.HashMap;
 
 @Component
 public class CustomGlobalFilter
@@ -43,8 +42,6 @@ public class CustomGlobalFilter
                         }
                     })
             );
-
-
         };
     }
 }
