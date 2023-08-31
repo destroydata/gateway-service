@@ -1,6 +1,7 @@
 package com.example.gateway.filter;
 
 import com.example.gateway.dto.CustomDto;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -13,15 +14,19 @@ import java.util.HashMap;
 @Component
 public class CustomGlobalFilter
     extends AbstractGatewayFilterFactory<CustomDto> {
+
     public CustomGlobalFilter() {
         super(CustomDto.class);
     }
+    @Value("${jwt.secret}")
+    private String secret;
 
     @Override
     public GatewayFilter apply(CustomDto config) {
         return (exchange, chain) -> {
             ServerHttpRequest request = exchange.getRequest();
             ServerHttpResponse response = exchange.getResponse();
+            System.out.println("======== "+ secret);
             if(config.getLogging()){
                 System.out.println("req : " + request.getId() +
                         ", " + request.getMethod() + " : "
