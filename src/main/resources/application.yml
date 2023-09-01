@@ -44,7 +44,10 @@ spring:
           uri: "http://localhost:9002"
           predicates:
             - Path=/api/v1/menu/**
-
+        - id: customer-service
+          uri: "lb://CUSTOMER-SERVICE"
+          predicates:
+            - Path=/api/v1/customer/**
 management:
   endpoints:
     web:
